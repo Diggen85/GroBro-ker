@@ -14,6 +14,7 @@ RUN apk add --no-cache \
 # Create directorys and volumes
 RUN mkdir -p \
     /etc/letsencrypt \
+    /etc/letsencrypt/renewal-hooks/deploy \
     /var/lib/letsencrypt \
     /var/log/letsencrypt \
     /mosquitto \
@@ -45,7 +46,7 @@ COPY supervisord.conf /etc/supervisord.conf
 COPY certbot-renew.sh /usr/local/bin/certbot-renew.sh
 COPY create-mosquitto-users.sh /usr/local/bin/create-mosquitto-users.sh
 COPY crontab /var/spool/cron/crontabs/certbot
-
+COPY mosquitto-copy.sh /etc/letsencrypt/renewal-hooks/deploy/
 
 RUN chmod +x /usr/local/bin/certbot-renew.sh /usr/local/bin/create-mosquitto-users.sh \
     && chmod 600 /var/spool/cron/crontabs/certbot \
