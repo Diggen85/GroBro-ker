@@ -8,7 +8,7 @@ services:
     environment:
       DOMAIN: mqtt.example.de
       EMAIL: admin@example.de
-      GROWAT_SN: "AAAA,AAAA
+      GROWAT_SN: "AAAA,BBBB"
       GROBRO_USER: "grobro"
       GROBRO_PASS: "Growatt"
     volumes:
