@@ -8,8 +8,8 @@ on:
     types:
       - published
 
-#  schedule:
-#    - cron: "0 1 * * *"
+  schedule:
+   - cron: "0 1 * * 1"
 
   workflow_dispatch:
 
@@ -51,15 +51,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ steps.repo.outputs.owner_lc }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=dev,enable=${{ github.event_name != 'release' }}
+            type=raw,value=dev,enable=${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
             type=raw,value=latest,enable=${{ github.event_name == 'release' }}
             type=ref,event=tag,enable=${{ github.event_name == 'release' }}
-            type=sha
+            type=raw,value=weekly,enable=${{ github.event_name == 'schedule' }}
           labels: |
             org.opencontainers.image.title=GroBro-Ker
             org.opencontainers.image.description=Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic user provisioning.
-            org.opencontainers.image.vendor=Benjamin Stark
-            org.opencontainers.image.authors=Benjamin Stark
+            org.opencontainers.image.vendor=Diggen85 (B. Stark)
+            org.opencontainers.image.authors=Diggen85 (B. Stark)
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
 
@@ -71,5 +71,7 @@ jobs:
           no-cache: true
           pull: true
           platforms: linux/amd64,linux/arm64
+          provenance: false
+          sbom: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
