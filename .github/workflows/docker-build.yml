@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  release:
+    types:
+      - published
 
 #  schedule:
 #    - cron: "0 1 * * *"
@@ -48,9 +51,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ steps.repo.outputs.owner_lc }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest
-            type=ref,event=branch
-            type=ref,event=tag
+            type=raw,value=dev,enable=${{ github.event_name != 'release' }}
+            type=raw,value=latest,enable=${{ github.event_name == 'release' }}
+            type=ref,event=tag,enable=${{ github.event_name == 'release' }}
             type=sha
           labels: |
             org.opencontainers.image.title=GroBro-Ker
