@@ -26,11 +26,11 @@ RUN mkdir -p \
 VOLUME /etc/letsencrypt /mosquitto/data
 
 # Add User
-RUN addgroup -S mosquitto \
-    && adduser -S -D -H -d /mosquitto -s /sbin/nologin -G mosquitto mosquitto \
-    && addgroup -S certbot \
-    && adduser -S -D -H -d /var/lib/letsencrypt -s /sbin/nologin -G certbot certbot \
-    && addgroup certbot mosquitto
+RUN (getent group mosquitto || addgroup -S mosquitto) \
+    && (id mosquitto || adduser -S -D -H -d /mosquitto -s /sbin/nologin -G mosquitto mosquitto) \
+    && (getent group certbot || addgroup -S certbot) \
+    && (id certbot || adduser -S -D -H -d /var/lib/letsencrypt -s /sbin/nologin -G certbot certbot) \
+    && addgroup certbot mosquitto 2>/dev/null || true
 
 # Set rights
 RUN chown -R certbot:certbot \
