@@ -38,7 +38,7 @@ RUN chown -R certbot:certbot \
     /var/lib/letsencrypt \
     /var/log/letsencrypt
 RUN chown -R mosquitto:mosquitto /mosquitto
-RUN chown certbot:mosquitto /mosquitto/certs \
+RUN chown certbot:mosquitto /mosquitto/certs
 RUN chmod 750 /mosquitto/certs
 
 VOLUME /etc/letsencrypt /mosquitto/data
@@ -50,9 +50,9 @@ COPY certbot-renew.sh /usr/local/bin/certbot-renew.sh
 COPY create-mosquitto-users.sh /usr/local/bin/create-mosquitto-users.sh
 COPY copy-mosquitto-cert.sh /usr/local/bin/copy-mosquitto-cert.sh
 
-RUN chmod +x /usr/local/bin/certbot-renew.sh /usr/local/bin/create-mosquitto-users.sh /usr/local/bin/copy-mosquitto-cert.sh \
-    && chmod 600 /var/spool/cron/crontabs/certbot \
-    && chown certbot:certbot /var/spool/cron/crontabs/certbot
+RUN chmod +x /usr/local/bin/certbot-renew.sh /usr/local/bin/create-mosquitto-users.sh /usr/local/bin/copy-mosquitto-cert.sh
+RUN chmod 600 /var/spool/cron/crontabs/certbot
+RUN chown certbot:certbot /var/spool/cron/crontabs/certbot
 
 EXPOSE 8080 7006
 
