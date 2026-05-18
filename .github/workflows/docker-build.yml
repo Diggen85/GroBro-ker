@@ -75,3 +75,11 @@ jobs:
           sbom: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Delete untagged package versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: grobro-ker
+          package-type: container
+          delete-only-untagged-versions: true
+          min-versions-to-keep: 0
