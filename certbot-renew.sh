@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-: "${DOMAIN:?Domainname not set}"
-: "${EMAIL:?Email not set}"
+: "${CERBOT_DOMAIN:?Domainname not set}"
+: "${CERTBOT_EMAIL:?Email not set}"
 
 CERT_DIR="/etc/letsencrypt/live/${DOMAIN}"
 MOSQUITTO_CERT_DIR="/mosquitto/certs"
