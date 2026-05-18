@@ -36,7 +36,7 @@ RUN (getent group mosquitto || addgroup -S mosquitto) \
 RUN chown -R certbot:certbot \
     /etc/letsencrypt \
     /var/lib/letsencrypt \
-    /var/log/letsencrypt \
+    /var/log/letsencrypt
 RUN chown -R mosquitto:mosquitto /mosquitto
 RUN chown certbot:mosquitto /mosquitto/certs \
 RUN chmod 750 /mosquitto/certs
