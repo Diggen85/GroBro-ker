@@ -23,13 +23,13 @@ RUN mkdir -p \
     /mosquitto/certs \
     /mosquitto/config \
     /var/spool/cron/crontabs
-VOLUME /etc/letsencrypt /mosquitto/data
+
 
 # Add User
 RUN (getent group mosquitto || addgroup -S mosquitto) \
-    && (id mosquitto || adduser -S -D -H -d /mosquitto -s /sbin/nologin -G mosquitto mosquitto) \
+    && (id mosquitto || adduser -S -D -H -h /mosquitto -s /sbin/nologin -G mosquitto mosquitto) \
     && (getent group certbot || addgroup -S certbot) \
-    && (id certbot || adduser -S -D -H -d /var/lib/letsencrypt -s /sbin/nologin -G certbot certbot) \
+    && (id certbot || adduser -S -D -H -h /var/lib/letsencrypt -s /sbin/nologin -G certbot certbot) \
     && addgroup certbot mosquitto 2>/dev/null || true
 
 # Set rights
@@ -37,18 +37,20 @@ RUN chown -R certbot:certbot \
     /etc/letsencrypt \
     /var/lib/letsencrypt \
     /var/log/letsencrypt \
-    && chown -R mosquitto:mosquitto /mosquitto \
-    && chown certbot:mosquitto /mosquitto/certs \
-    && chmod 750 /mosquitto/certs
+RUN chown -R mosquitto:mosquitto /mosquitto
+RUN chown certbot:mosquitto /mosquitto/certs \
+RUN chmod 750 /mosquitto/certs
+
+VOLUME /etc/letsencrypt /mosquitto/data
 
 COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
 COPY supervisord.conf /etc/supervisord.conf
+COPY crontab /var/spool/cron/crontabs/certbot
 COPY certbot-renew.sh /usr/local/bin/certbot-renew.sh
 COPY create-mosquitto-users.sh /usr/local/bin/create-mosquitto-users.sh
-COPY crontab /var/spool/cron/crontabs/certbot
-COPY mosquitto-copy.sh /etc/letsencrypt/renewal-hooks/deploy/
+COPY copy-mosquitto-cert.sh /usr/local/bin/copy-mosquitto-cert.sh
 
-RUN chmod +x /usr/local/bin/certbot-renew.sh /usr/local/bin/create-mosquitto-users.sh \
+RUN chmod +x /usr/local/bin/certbot-renew.sh /usr/local/bin/create-mosquitto-users.sh /usr/local/bin/copy-mosquitto-cert.sh \
     && chmod 600 /var/spool/cron/crontabs/certbot \
     && chown certbot:certbot /var/spool/cron/crontabs/certbot
 
