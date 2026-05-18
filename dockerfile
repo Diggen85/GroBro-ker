@@ -11,7 +11,7 @@ RUN apk add --no-cache \
     ca-certificates \
     openssl
 
-# Create directorys
+# Create directorys and volumes
 RUN mkdir -p \
     /etc/letsencrypt \
     /var/lib/letsencrypt \
@@ -22,6 +22,7 @@ RUN mkdir -p \
     /mosquitto/certs \
     /mosquitto/config \
     /var/spool/cron/crontabs
+VOLUME /etc/letsencrypt /mosquitto/data
 
 # Add User
 RUN addgroup -S mosquitto \
