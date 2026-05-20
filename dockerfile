@@ -1,9 +1,9 @@
+FROM alpine:latest
+
 LABEL org.opencontainers.image.title="GroBro-Ker"
 LABEL org.opencontainers.image.description="Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic user provisioning."
 LABEL org.opencontainers.image.authors="Diggen85 (B. Stark)"
 LABEL org.opencontainers.image.licenses="MIT"
-
-FROM alpine:latest
 
 RUN apk add --no-cache \
     bash \
