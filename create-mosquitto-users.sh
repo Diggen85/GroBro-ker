@@ -25,4 +25,4 @@ for serial in "${SERIALS[@]}"; do
 done
 
 chown mosquitto:mosquitto "$PASSWORD_FILE"
-chmod 600 "$PASSWORD_FILE"
+chmod 0600 "$PASSWORD_FILE"
