@@ -55,7 +55,7 @@ ghcr.io/diggen85/grobro-ker
 | Volume | Description |
 |---|---|
 | `/etc/letsencrypt` | Cerbot Certificates |
-| `/mosquitto/data` | mosquitto.db for persistence |
+| `/var/lib/mosquitto` | Path of mosquitto.db for persistence |
 
 ---
 # Ports
