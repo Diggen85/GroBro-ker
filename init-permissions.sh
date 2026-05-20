@@ -29,22 +29,18 @@ mkdir -p \
   /etc/letsencrypt \
   /var/lib/letsencrypt \
   /var/log/letsencrypt \
-  /mosquitto/data \
-  /mosquitto/log \
-  /mosquitto/certs \
-  /mosquitto/config
+  /var/lib/mosquitto \
+  /etc/mosquitto/certs \
 
 fix_owner certbot:certbot /etc/letsencrypt
 fix_owner certbot:certbot /var/lib/letsencrypt
 fix_owner certbot:certbot /var/log/letsencrypt
 
-fix_owner mosquitto:mosquitto /mosquitto/data
-fix_owner mosquitto:mosquitto /mosquitto/log
-fix_owner mosquitto:mosquitto /mosquitto/config
+fix_owner mosquitto:mosquitto /var/lib/mosquitto
+fix_owner certbot:mosquitto /etc/mosquitto/certs
 
-fix_owner certbot:mosquitto /mosquitto/certs
-
-fix_mode 750 /mosquitto/certs
+fix_mode 750 /etc/mosquitto/certs
 fix_mode 700 /etc/letsencrypt
+fix_mode 700 /var/lib/mosquitto
 
 echo "Permissions set"
