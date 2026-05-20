@@ -41,83 +41,21 @@ ghcr.io/diggen85/grobro-ker
 
 # Environment Variables
 
-## CERTBOT_DOMAIN
-
-Domain name used for the Let's Encrypt certificate.
-
-### Example
-
-```yaml
-CERTBOT_DOMAIN: mqtt.example.de
-```
-
-### Required
-
-Yes
+| Variable | Description |
+|---|---|
+| `CERTBOT_DOMAIN` | Domain name used for the Let's Encrypt certificate. |
+| `CERTBOT_EMAIL` | Email address used for Let's Encrypt registration and renewal notifications. |
+| `GROWAT_SN` | Comma separated list of Growatt serial numbers. |
+| `GROBRO_USER` | mMQTT username used for broker authentication. |
+| `GROBRO_PASS` | MQTT password used for broker authentication. |
 
 ---
+# Volumes
 
-## CERTBOT_EMAIL
-
-Email address used for Let's Encrypt registration and renewal notifications.
-
-### Example
-
-```yaml
-CERTBOT_EMAIL: admin@example.de
-```
-
-### Required
-
-Yes
-
----
-
-## GROWAT_SN
-
-Comma separated list of Growatt serial numbers.
-
-### Example
-
-```yaml
-GROWAT_SN: "AAAA,BBBB"
-```
-
-### Required
-
-Yes
-
----
-
-## GROBRO_USER
-
-MQTT username used for broker authentication.
-
-### Example
-
-```yaml
-GROBRO_USER: "grobro"
-```
-
-### Required
-
-Yes
-
----
-
-## GROBRO_PASS
-
-MQTT password used for broker authentication.
-
-### Example
-
-```yaml
-GROBRO_PASS: "Growatt"
-```
-
-### Required
-
-Yes
+| Volume | Description |
+|---|---|
+| `/etc/letsencrypt` | Cerbot Certificates |
+| `/mosquitto/data` | mosquitto.db for persistence |
 
 ---
 # Ports
@@ -128,7 +66,6 @@ Yes
 | `7006` | MQTT with TLS for Growatt Devices |
 
 ---
-
 # License
 
 MIT License
