@@ -13,16 +13,25 @@ Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic 
 - Supervisor + Cron based process handling
 
 ---
-# Information
+# Notes
 
 - Needs reachable Port 80 (Container 8080) for Certbot
-- If you use it behind NPM (NginX Proxy Manager) use the following workaround config under "Adavanced" to passthrough the acme-challange
+- If you run it behind NPM (NginX Proxy Manager), use the following workaround config under "Adavanced" to passthrough the acme-challange
    ```
    rewrite ^(/.well-known/acme-challenge/.*)$ /internal$1 last;
    location ~ ^/internal(/.well-known/acme-challenge/.*)$ {
      proxy_pass http://grobro-ker:8080$1;
    }
    ```
+- Config for GroBro
+   | Variable | Description |
+   |---|---|
+   | `SOURCE_MQTT_HOST:` | `grobro-ker` if they are in the same docker network / docker host IP  / `CERTBOT_DOMAIN`  |
+   | `SOURCE_MQTT_PORT` | `7006` |
+   | `SOURCE_MQTT_TLS` | `true` |
+   | `SOURCE_MQTT_USER` | same as `GROBRO_USER` |
+   | `SOURCE_MQTT_PASS` | same as `GROBRO_PASS` | 
+  
 
 ---
 # Example docker-compose.yaml
