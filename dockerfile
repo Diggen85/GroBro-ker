@@ -39,11 +39,12 @@ RUN chown -R certbot:certbot \
     /etc/letsencrypt \
     /var/lib/letsencrypt \
     /var/log/letsencrypt
-RUN chown -R mosquitto:mosquitto /mosquitto
-RUN chown certbot:mosquitto /mosquitto/certs
-RUN chmod 750 /mosquitto/certs
+RUN chown -R mosquitto:mosquitto /etc/mosquitto/
+RUN chown certbot:mosquitto /etc/mosquitto/certs
+RUN chmod 750 /etc/mosquitto/certs
+RUN chown mosquitto:mosquitto /var/lib/mosquitto
 
-VOLUME /etc/letsencrypt /mosquitto/data
+VOLUME /etc/letsencrypt /var/lib/mosquitto
 
 COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
 COPY supervisord.conf /etc/supervisord.conf
@@ -61,8 +62,6 @@ RUN chmod +x /usr/local/bin/certbot-renew.sh \
     /usr/local/bin/init-permissions.sh
 RUN chmod 600 /var/spool/cron/crontabs/certbot
 RUN chown certbot:certbot /var/spool/cron/crontabs/certbot
-RUN chown mosquitto:mosquitto /var/lib/mosquitto
-RUN chown certbot:mosquitto /etc/mosquitto/certs
 
 EXPOSE 8080 7006
 
