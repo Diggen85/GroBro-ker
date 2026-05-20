@@ -16,14 +16,14 @@ if [ ! -f "${CERT_DIR}/fullchain.pem" ]; then
     --agree-tos \
     --email "${CERTBOT_EMAIL}" \
     -d "${CERTBOT_DOMAIN}" \
-    --post-hook /usr/local/bin/copy-mosquitto-cert.sh
 else 
   # Renewal
   certbot renew \
     --quiet \
     --http-01-port 8080 \
-    --post-hook /usr/local/bin/copy-mosquitto-cert.sh
 fi
+
+/usr/local/bin/copy-mosquitto-cert.sh
 
 # Display Cert
 certbot certificates --cert-name "${CERTBOT_DOMAIN}"
