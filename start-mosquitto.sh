@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-while [ ! -f /mosquitto/config/passwdfile ]; do
+while [ ! -f /mosquitto/config/passwordfile ]; do
   echo "Waiting for passwordfile..."
   sleep 2
 done
