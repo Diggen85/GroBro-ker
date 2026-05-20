@@ -13,4 +13,4 @@ services:
       GROBRO_PASS: "Growatt"
     volumes:
       - ./letsencrypt:/etc/letsencrypt
-      - ./mosquitto-data:/mosquitto/data
+      - ./mosquitto-data:/var/lib/mosquitto
