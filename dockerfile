@@ -55,6 +55,7 @@ COPY certbot-renew.sh /usr/local/bin/certbot-renew.sh
 COPY create-mosquitto-users.sh /usr/local/bin/create-mosquitto-users.sh
 COPY copy-mosquitto-cert.sh /usr/local/bin/copy-mosquitto-cert.sh
 COPY start-mosquitto.sh /usr/local/bin/start-mosquitto.sh
+COPY init-permissions.sh /usr/local/bin/init-permissions.sh
 
 RUN chmod +x /usr/local/bin/certbot-renew.sh /usr/local/bin/create-mosquitto-users.sh /usr/local/bin/copy-mosquitto-cert.sh /usr/local/bin/start-mosquitto.sh
 RUN chmod 600 /var/spool/cron/crontabs/certbot
