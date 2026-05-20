@@ -6,7 +6,7 @@ Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic 
 # Features
 
 - Automatic Let's Encrypt certificate creation
-- Automatic certificate renewal
+- Automatic certificate renewal, check every 12 hours
 - Mosquitto TLS configuration on Port 7006
 - Automatic MQTT password file generation for Growatt Serials
 - Non-root service execution
@@ -15,8 +15,8 @@ Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic 
 ---
 # Notes
 
-- Needs reachable Port 80 (Container 8080) for Certbot
-- If you run it behind NPM (NginX Proxy Manager), use the following workaround config under "Adavanced" to passthrough the acme-challange
+- GroBro-ker needs a reachable Port 80 (Container 8080) for Certbot
+- If you run GroBro-ker behind NPM (NginX Proxy Manager), use the following workaround config under "Adavanced" to passthrough the acme-challange
    ```
    rewrite ^(/.well-known/acme-challenge/.*)$ /internal$1 last;
    location ~ ^/internal(/.well-known/acme-challenge/.*)$ {
