@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PASSWORD_FILE="/mosquitto/config/passwordfile"
+PASSWORD_FILE="/etc/mosquitto/passwordfile"
 
 # Check if 
 : "${GROWATT_SN:?Serial not set}"
