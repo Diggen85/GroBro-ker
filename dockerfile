@@ -20,13 +20,10 @@ RUN apk add --no-cache \
 RUN mkdir -p \
     /etc/letsencrypt \
     /etc/letsencrypt/renewal-hooks/deploy \
+    /etc/mosquitto/certs \
+    /var/lib/mosquitto \
     /var/lib/letsencrypt \
     /var/log/letsencrypt \
-    /mosquitto \
-    /mosquitto/data \
-    /mosquitto/log \
-    /mosquitto/certs \
-    /mosquitto/config \
     /var/spool/cron/crontabs
 
 
@@ -64,6 +61,8 @@ RUN chmod +x /usr/local/bin/certbot-renew.sh \
     /usr/local/bin/init-permissions.sh
 RUN chmod 600 /var/spool/cron/crontabs/certbot
 RUN chown certbot:certbot /var/spool/cron/crontabs/certbot
+RUN chown mosquitto:mosquitto /var/lib/mosquitto
+RUN chown certbot:mosquitto /etc/mosquitto/certs
 
 EXPOSE 8080 7006
 
