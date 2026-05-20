@@ -15,12 +15,12 @@ if [ ! -f "${CERT_DIR}/fullchain.pem" ]; then
     --non-interactive \
     --agree-tos \
     --email "${CERTBOT_EMAIL}" \
-    -d "${CERTBOT_DOMAIN}" \
+    -d "${CERTBOT_DOMAIN}"
 else 
   # Renewal
   certbot renew \
     --quiet \
-    --http-01-port 8080 \
+    --http-01-port 8080
 fi
 
 /usr/local/bin/copy-mosquitto-cert.sh
