@@ -29,7 +29,7 @@ RUN mkdir -p \
 
 # Add User
 RUN (getent group mosquitto || addgroup -S mosquitto) \
-    && (id mosquitto || adduser -S -D -H -h /mosquitto -s /sbin/nologin -G mosquitto mosquitto) \
+    && (id mosquitto || adduser -S -D -H -h /var/lib/mosquitto/ -s /sbin/nologin -G mosquitto mosquitto) \
     && (getent group certbot || addgroup -S certbot) \
     && (id certbot || adduser -S -D -H -h /var/lib/letsencrypt -s /sbin/nologin -G certbot certbot) \
     && addgroup certbot mosquitto 2>/dev/null || true
@@ -42,7 +42,6 @@ RUN chown -R certbot:certbot \
 RUN chown -R mosquitto:mosquitto /etc/mosquitto/
 RUN chown certbot:mosquitto /etc/mosquitto/certs
 RUN chmod 750 /etc/mosquitto/certs
-RUN chown mosquitto:mosquitto /var/lib/mosquitto
 
 VOLUME /etc/letsencrypt /var/lib/mosquitto
 
