@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-: "${CERBOT_DOMAIN:?Domainname not set}"
+: "${CERTBOT_DOMAIN:?Domainname not set}"
 : "${CERTBOT_EMAIL:?Email not set}"
 
 CERT_DIR="/etc/letsencrypt/live/${DOMAIN}"
