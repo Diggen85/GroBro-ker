@@ -26,3 +26,6 @@ done
 
 chown mosquitto:mosquitto "$PASSWORD_FILE"
 chmod 0700 "$PASSWORD_FILE"
+
+# Moquitto reload config
+pkill -HUP mosquitto
