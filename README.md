@@ -1,6 +1,6 @@
 # GroBro-Ker
 
-Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic user provisioning for GroBro / Growatt needs
+Secure Mosquitto MQTT broker with integrated Certbot auto-renewal and automatic user provisioning for [GroBro](https://github.com/robertzaage/GroBro/) to use your Growatt NEO/SPF/TL-XH2 inverters, NOAH/NEXA batteries and ShineWeLink-X2 dataloggers localy.
 
 ---
 # Features
